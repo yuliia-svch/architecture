@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{data.details.name}}, {{data.details.city}}</h1>
+<div mat-dialog-content>
+  <img [src]="data.details.imageUrl" style="width: 90%">
+  <div>Address: {{data.details.address}}</div>
+  <div>Contact by phone: {{data.details.phoneNumber}}</div>
+  <div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Specialization</th>
+          <th scope="col">Years of Experience</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let doctor of data.doctors">
+          <td>{{doctor.firstName}} {{doctor.lastName}}</td>
+          <td>{{ doctor.specialization }}</td>
+          <td>{{ doctor.experience }}</td>
+          <td><button mat-button class="btn btn-outline-secondary" (click)="sign(doctor.id)">Request Declaration</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-outline-secondary">Ok</button>
+</div>

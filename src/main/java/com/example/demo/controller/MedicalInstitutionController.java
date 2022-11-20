@@ -14,15 +14,11 @@ public class MedicalInstitutionController {
     @Autowired
     protected IMedicalInstitutionService medicalInstitutionService;
 
-  @GetMapping("/medicalInstitutions")
-  public List<MedicalInstitution> getMedicalInstitutions() {
-    return medicalInstitutionService.getAllMedicalInstitutions();
-  }
-//    @GetMapping("/medicalInstitutions")
-//    @ResponseBody
-//    public List<MedicalInstitution> getMedicalInstitutions(@RequestParam String city) {
-//        return medicalInstitutionService.getMedicalInstitutionsByCity(city);
-//    }
+    @GetMapping("/medicalInstitutions")
+    @ResponseBody
+    public List<MedicalInstitution> getMedicalInstitutions(@RequestParam String city) {
+        return medicalInstitutionService.getMedicalInstitutionsByCity(city);
+    }
 
     @GetMapping("/doctors")
     @ResponseBody

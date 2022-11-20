@@ -4,4 +4,5 @@ export class MedicalInstitution {
   address: string;
   phoneNumber: string;
   city: string;
+  imageUrl: string;
 }
