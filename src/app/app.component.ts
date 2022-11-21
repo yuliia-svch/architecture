@@ -4,6 +4,8 @@ import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
 import { MedicalInstitution } from './medical-institution';
 import { MedicalInstitutionService } from './medical-institution-service.service';
+import { DeclarationRequest } from './declaration-request';
+import { DeclarationRequestService } from './declaration-request.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +13,12 @@ import { MedicalInstitutionService } from './medical-institution-service.service
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Medical Module';
+  title = 'Institutions';
   medicalInstitutions: MedicalInstitution[];
-  constructor(private medicalInstitutionService: MedicalInstitutionService) {
+  declarationRequests: DeclarationRequest[];
+  constructor(private medicalInstitutionService: MedicalInstitutionService,
+  private declarationRequestService: DeclarationRequestService) {
+  this.refresh(true);
   }
   onSelected(value:string): void {
   	this.medicalInstitutionService.findByCity(value).subscribe(data => {
@@ -21,4 +26,11 @@ export class AppComponent {
     });
   }
 
+  refresh(newItem: boolean) {
+      if(newItem == true) {
+        this.declarationRequestService.findDeclarationsByUser('1').subscribe((data: any) => {
+           this.declarationRequests = data;
+        });
+      }
+  }
 }

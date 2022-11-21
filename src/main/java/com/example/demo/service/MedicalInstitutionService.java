@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicalInstitutionService implements IMedicalInstitutionService {
@@ -21,7 +22,11 @@ public class MedicalInstitutionService implements IMedicalInstitutionService {
         return medicalInstitutionRepository.findAll();
     }
 
-    @Override
+  public Optional<MedicalInstitution> getMedicalInstitutionById(long id) {
+    return medicalInstitutionRepository.findById(id);
+  }
+
+  @Override
     public List<MedicalInstitution> getMedicalInstitutionsByCity(String city) {
         return medicalInstitutionRepository.findByCity(city);
     }
@@ -29,6 +34,11 @@ public class MedicalInstitutionService implements IMedicalInstitutionService {
     @Override
     public List<Doctor> getDoctors(long medInstId) {
         return doctorRepository.findByMedInstId(medInstId);
+    }
+
+    @Override
+    public Optional<Doctor> getDoctor(long doctorId) {
+        return doctorRepository.findById(doctorId);
     }
 
 }

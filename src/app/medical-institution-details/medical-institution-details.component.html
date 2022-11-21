@@ -19,7 +19,11 @@
           <td>{{doctor.firstName}} {{doctor.lastName}}</td>
           <td>{{ doctor.specialization }}</td>
           <td>{{ doctor.experience }}</td>
-          <td><button mat-button class="btn btn-outline-secondary" (click)="sign(doctor.id)">Request Declaration</button></td>
+          <td><p *ngIf="doctor.signed; else showStatus">Requested</p>
+          <ng-template #showStatus>
+            <button mat-button class="btn btn-outline-secondary" (click)="sign(doctor.id)">Request Declaration</button>
+          </ng-template>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -27,5 +31,5 @@
   </div>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-outline-secondary">Ok</button>
+  <button mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="changed" class="btn btn-outline-secondary">Ok</button>
 </div>

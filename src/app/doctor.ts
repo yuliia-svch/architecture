@@ -1,8 +1,9 @@
 export class Doctor {
-  id : string;
+  id : number;
   firstName : string;
   lastName : string;
   specialization : string;
   experience : number;
   medInstId : string;
+  signed : boolean;
 }

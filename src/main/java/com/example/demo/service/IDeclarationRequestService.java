@@ -8,4 +8,5 @@ public interface IDeclarationRequestService {
     List<DeclarationRequest> getDeclarationRequestsByUser(long userId);
     List<DeclarationRequest> getDeclarationRequestsByDoctor(long doctorId);
     List<DeclarationRequest> getDeclarationRequestsByConsultant(long consultantId);
+    void addDeclarationRequest(DeclarationRequest declarationRequest);
 }

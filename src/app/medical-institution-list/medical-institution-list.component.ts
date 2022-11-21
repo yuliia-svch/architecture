@@ -1,4 +1,4 @@
-import { Component, Input, HostListener } from '@angular/core';
+import { Component, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { MedicalInstitution } from '../medical-institution';
 import { Doctor } from '../doctor';
 import { MedicalInstitutionService } from '../medical-institution-service.service';
@@ -15,7 +15,7 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class MedicalInstitutionListComponent {
   @Input() medicalInstitutions: MedicalInstitution[];
   doctors: Doctor[];
-
+  @Output() newItemEvent = new EventEmitter<boolean>();
   constructor(private medicalInstitutionService: MedicalInstitutionService, private dialog: MatDialog) {
   }
 
@@ -40,7 +40,7 @@ export class MedicalInstitutionListComponent {
 
   }
   openDialog(selectedMed: any): void {
-      this.dialog.open(MedicalInstitutionDetailsComponent, {
+      const dialogRef = this.dialog.open(MedicalInstitutionDetailsComponent, {
         width: '50%',
         maxHeight: '100vh',
         data: {
@@ -48,6 +48,12 @@ export class MedicalInstitutionListComponent {
            doctors: this.doctors,
         },
       });
-      this.doctors = [];
+      dialogRef.afterClosed().subscribe((result : any) => {
+        if(result == true) {
+          this.newItemEvent.emit(true);
+        }
+        this.doctors = [];
+      });
+
     }
 }

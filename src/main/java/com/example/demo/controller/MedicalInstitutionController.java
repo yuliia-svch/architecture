@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DeclarationRequestDTO;
+import com.example.demo.models.DeclarationRequest;
 import com.example.demo.models.Doctor;
 import com.example.demo.models.MedicalInstitution;
+import com.example.demo.service.IDeclarationRequestService;
 import com.example.demo.service.IMedicalInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

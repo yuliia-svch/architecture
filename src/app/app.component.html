@@ -1,6 +1,7 @@
-<div class="container">
+<div class="mx-5">
+  <div class="d-flex justify-content-center" style="font-size: 34px;">Medical Module</div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8 my-5">
       <div class="card bg-dark my-5">
         <div class="card-body">
           <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
@@ -16,7 +17,10 @@
         </div>
       </div>
 <!--      <router-outlet></router-outlet>-->
-      <app-medical-institution-list [medicalInstitutions]="medicalInstitutions"></app-medical-institution-list>
+      <app-medical-institution-list (newItemEvent)="refresh($event)" [medicalInstitutions]="medicalInstitutions"></app-medical-institution-list>
+    </div>
+    <div class="col-md-4 my-5">
+      <app-declaration-request-list-user [declarationRequests]="declarationRequests"></app-declaration-request-list-user>
     </div>
   </div>
 </div>

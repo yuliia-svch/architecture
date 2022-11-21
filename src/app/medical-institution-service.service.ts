@@ -26,4 +26,5 @@ export class MedicalInstitutionService {
         { params: new HttpParams().set('medInstId', id) } : {};
       return this.http.get<Doctor[]>(this.doctorsUrl, options);
     }
+
 }
