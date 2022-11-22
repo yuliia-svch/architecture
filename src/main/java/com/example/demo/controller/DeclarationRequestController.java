@@ -22,12 +22,12 @@ public class DeclarationRequestController {
     @Autowired
     protected IMedicalInstitutionService medicalInstitutionService;
 
-    @PostMapping("/declarationRequests")
+    @PostMapping("/user/declarationRequests")
     void addDeclaration(@RequestBody DeclarationRequestDTO declarationRequestDTO) {
         declarationRequestService.addDeclarationRequest(DeclarationRequestConverter.convertFromDTO(declarationRequestDTO));
     }
 
-    @GetMapping("/declarationRequestsByUser")
+    @GetMapping("/user/declarationRequestsByUser")
     @ResponseBody
     public List<DeclarationRequestDTO> getDeclarationRequestsByUser(@RequestParam long userId) {
       List<DeclarationRequestDTO> drDTO = new ArrayList<>();

@@ -17,13 +17,13 @@ public class MedicalInstitutionController {
     @Autowired
     protected IMedicalInstitutionService medicalInstitutionService;
 
-    @GetMapping("/medicalInstitutions")
+    @GetMapping("/user/medicalInstitutions")
     @ResponseBody
     public List<MedicalInstitution> getMedicalInstitutions(@RequestParam String city) {
         return medicalInstitutionService.getMedicalInstitutionsByCity(city);
     }
 
-    @GetMapping("/doctors")
+    @GetMapping("/user/doctors")
     @ResponseBody
     public List<Doctor> getDoctors(@RequestParam long medInstId) {
         return medicalInstitutionService.getDoctors(medInstId);

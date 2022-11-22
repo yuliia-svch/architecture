@@ -11,8 +11,8 @@ export class MedicalInstitutionService {
   private doctorsUrl: string;
 
   constructor(private http: HttpClient) {
-    this.medicalInstitutionsUrl = 'http://localhost:8080/medicalInstitutions';
-    this.doctorsUrl = 'http://localhost:8080/doctors';
+    this.medicalInstitutionsUrl = 'http://localhost:8080/user/medicalInstitutions';
+    this.doctorsUrl = 'http://localhost:8080/user/doctors';
   }
 
   public findByCity(city : string): Observable<MedicalInstitution[]> {

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,23 @@ import { DeclarationRequestService } from './declaration-request.service';
 import { MedicalInstitutionDetailsComponent } from './medical-institution-details/medical-institution-details.component';
 import { DeclarationRequestFormComponent } from './declaration-request-form/declaration-request-form.component';
 import { DeclarationRequestListUserComponent } from './declaration-request-list-user/declaration-request-list-user.component';
+import { AppService } from './app.service';
+import { TokenStorageService } from './token-storage.service';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class XhrInterceptor implements HttpInterceptor {
+  constructor(private token: TokenStorageService) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let authReq = req;
+    const token = this.token.getToken();
+    if (token != null) {
+      authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
+    }
+    return next.handle(authReq);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -37,7 +54,8 @@ import { DeclarationRequestListUserComponent } from './declaration-request-list-
     MatInputModule,
     MatCheckboxModule
   ],
-  providers: [MedicalInstitutionService, DeclarationRequestService],
+  providers: [MedicalInstitutionService, DeclarationRequestService, AppService,
+  { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

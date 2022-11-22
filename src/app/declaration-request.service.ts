@@ -8,8 +8,8 @@ export class DeclarationRequestService {
   private declarationsUrl: string;
   private declarationsByUserUrl: string;
   constructor(private http: HttpClient) {
-    this.declarationsUrl = 'http://localhost:8080/declarationRequests';
-    this.declarationsByUserUrl = 'http://localhost:8080/declarationRequestsByUser';
+    this.declarationsUrl = 'http://localhost:8080/user/declarationRequests';
+    this.declarationsByUserUrl = 'http://localhost:8080/user/declarationRequestsByUser';
   }
 
   public addDeclarationRequest(declarationRequest: DeclarationRequest) {
