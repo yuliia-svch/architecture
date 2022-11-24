@@ -28,6 +28,11 @@ public class DeclarationRequestService implements IDeclarationRequestService {
     }
 
     @Override
+    public List<DeclarationRequest> getDeclarationRequests() {
+      return declarationRequestRepository.findAll();
+    }
+
+    @Override
     public void addDeclarationRequest(DeclarationRequest declarationRequest) {
       DeclarationRequest dr = declarationRequestRepository.findByUserIdAndDoctorId(declarationRequest.getUserId(), declarationRequest.getDoctorId()).get(0);
       if(dr != null) {

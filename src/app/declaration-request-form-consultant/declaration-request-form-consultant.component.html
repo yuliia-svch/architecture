@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Process declaration request for {{data.declaration.userName}}</h1>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Enter comment"
+              formControlName="info"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-outline-secondary" (click)="close()">Close</button>
+  <button class="btn btn-outline-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

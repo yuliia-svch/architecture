@@ -9,7 +9,7 @@ public class DeclarationRequestConverter {
     declarationRequest.setComment(declarationRequestDTO.getComment());
     declarationRequest.setStatus(declarationRequestDTO.getStatus());
     declarationRequest.setMedData(declarationRequestDTO.getMedData());
-    declarationRequest.setUserId(1);
+    declarationRequest.setUserId(declarationRequestDTO.getUserId());
     declarationRequest.setConsultantId(declarationRequestDTO.getConsultantId());
     return declarationRequest;
   }

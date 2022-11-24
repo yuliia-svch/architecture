@@ -22,4 +22,7 @@ export class DeclarationRequestService {
         return this.http.get<DeclarationRequest[]>(this.declarationsByUserUrl, options);
       }
 
+  public findAllDeclarations(): Observable<DeclarationRequest[]> {
+     return this.http.get<DeclarationRequest[]>(this.declarationsUrl);
+  }
 }

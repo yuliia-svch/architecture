@@ -16,6 +16,6 @@ public class DeclarationRequestDTO {
   private String comment;
 
   private String doctorName;
-  private String consultantName;
+  private String userName;
   private String medInst;
 }

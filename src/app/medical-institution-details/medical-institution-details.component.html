@@ -21,7 +21,7 @@
           <td>{{ doctor.experience }}</td>
           <td><p *ngIf="doctor.signed; else showStatus">Requested</p>
           <ng-template #showStatus>
-            <button mat-button class="btn btn-outline-secondary" (click)="sign(doctor.id)">Request Declaration</button>
+            <div [hidden]="!isUser"><button mat-button class="btn btn-outline-secondary" (click)="sign(doctor.id)">Request Declaration</button></div>
           </ng-template>
           </td>
         </tr>

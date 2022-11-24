@@ -3,6 +3,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 import { DeclarationRequestFormComponent } from '../declaration-request-form/declaration-request-form.component'
 import { DeclarationRequest } from '../declaration-request';
 import { DeclarationRequestService } from '../declaration-request.service';
+import { TokenStorageService } from '../token-storage.service';
 
 @Component({
   selector: 'app-medical-institution-details',
@@ -12,10 +13,15 @@ import { DeclarationRequestService } from '../declaration-request.service';
 export class MedicalInstitutionDetailsComponent {
   declarationRequest : DeclarationRequest;
   changed : boolean;
+  isUser = true;
+  roles : any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog,
-  private declarationRequestService: DeclarationRequestService) {
+  private declarationRequestService: DeclarationRequestService,
+  private tokenStorage: TokenStorageService) {
     this.declarationRequest = new DeclarationRequest();
     this.changed = false;
+    this.roles = this.tokenStorage.getUser().roles;
+    this.isUser = this.roles.includes('ROLE_USER');
   }
 
 
@@ -47,6 +53,7 @@ export class MedicalInstitutionDetailsComponent {
                           value.signed = true;
                      }
               });
+              this.declarationRequest.userId = this.tokenStorage.getUser().id;
               this.declarationRequest.doctorId = selectedDoc.id;
               this.declarationRequest.status = 'New';
               this.declarationRequest.medData = result.info;

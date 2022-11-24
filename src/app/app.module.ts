@@ -2,11 +2,13 @@ import { NgModule, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,7 @@ import { DeclarationRequestListUserComponent } from './declaration-request-list-
 import { AppService } from './app.service';
 import { TokenStorageService } from './token-storage.service';
 import { Observable } from 'rxjs';
+import { DeclarationRequestFormConsultantComponent } from './declaration-request-form-consultant/declaration-request-form-consultant.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -40,7 +43,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MedicalInstitutionListComponent,
     MedicalInstitutionDetailsComponent,
     DeclarationRequestFormComponent,
-    DeclarationRequestListUserComponent
+    DeclarationRequestListUserComponent,
+    DeclarationRequestFormConsultantComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,9 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [MedicalInstitutionService, DeclarationRequestService, AppService,
   { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],

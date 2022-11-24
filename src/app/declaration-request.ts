@@ -1,12 +1,12 @@
 export class DeclarationRequest {
-  userId?: string;
-  doctorId: number;
+  userId: string;
+  doctorId: string;
   consultantId?: string;
   status: string;
   medData: string;
   comment?: string;
 
   doctorName?: string;
-  consultantName?: string;
+  userName?: string;
   medInst?: string;
 }

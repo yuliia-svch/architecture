@@ -1,34 +1,43 @@
 <div [hidden]="!authenticated">
   <div class="mx-5">
-    <div class="row">
-      <div class="col d-flex justify-content-center" style="font-size: 34px;">Medical Module</div>
-      <div class="col d-flex justify-content-end"><a [routerLink]="" (click)="logout()">Log out</a></div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 my-5">
-        <div class="card bg-dark my-5">
-          <div class="card-body">
-            <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-            <div class="input-group mb-3">
-              <select class="custom-select" id="inputGroupSelect03" #cities (change)="onSelected(cities.value)">
-                <option selected>Choose your city</option>
-                <option value="Lviv">Lviv</option>
-                <option value="Kyiv">Kyiv</option>
-                <option value="Ternopil">Ternopil</option>
-                <option value="Ivano-Frankivsk">Ivano-Frankivsk</option>
-              </select>
+    <div class="col d-flex justify-content-center" style="font-size:28px;">Help Hub</div>
+    <div class="col d-flex justify-content-end"><a [routerLink]="" (click)="logout()" style="color: blue;">Log out</a></div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Home"> <div class="d-flex justify-content-center"><img src="assets/home.jpg"> </div></mat-tab>
+    <mat-tab label="Social"> <div class="d-flex justify-content-center"><img src="assets/social.jpg"> </div></mat-tab>
+    <mat-tab label="Psychological"> <div class="d-flex justify-content-center"><img src="assets/psych.jpeg"> </div></mat-tab>
+    <mat-tab label="Medical">
+    <div class="m-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card bg-dark my-5">
+            <div class="card-body">
+              <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+              <div class="input-group mb-3">
+                <select class="custom-select" id="inputGroupSelect03" #cities (change)="onSelected(cities.value)">
+                  <option selected>Choose your city</option>
+                  <option value="Lviv">Lviv</option>
+                  <option value="Kyiv">Kyiv</option>
+                  <option value="Ternopil">Ternopil</option>
+                  <option value="Ivano-Frankivsk">Ivano-Frankivsk</option>
+                </select>
+              </div>
             </div>
           </div>
+    <!--      <router-outlet></router-outlet>-->
+          <app-medical-institution-list (newItemEvent)="refresh($event)" [medicalInstitutions]="medicalInstitutions"></app-medical-institution-list>
         </div>
-  <!--      <router-outlet></router-outlet>-->
-        <app-medical-institution-list (newItemEvent)="refresh($event)" [medicalInstitutions]="medicalInstitutions"></app-medical-institution-list>
-      </div>
-      <div class="col-md-4 my-5">
-        <app-declaration-request-list-user [declarationRequests]="declarationRequests"></app-declaration-request-list-user>
+        <div class="col-md-6 my-5">
+          <app-declaration-request-list-user [isUser]="authenticatedAsUser" [userId]="userId" [declarationRequests]="declarationRequests" (newItemEvent)="refresh($event)"></app-declaration-request-list-user>
+        </div>
       </div>
     </div>
-  </div>
+    </mat-tab>
+    <mat-tab label="Repurposing"> <div class="d-flex justify-content-center"><img src="assets/repurposing.jpg"></div> </mat-tab>
+    <mat-tab label="Job Search"> <div class="d-flex justify-content-center"><img src="assets/jobs.jpg"> </div></mat-tab>
+    <mat-tab label="Apartment Search"> <div class="d-flex justify-content-center"><img src="assets/apartment.jpeg"> </div></mat-tab>
+  </mat-tab-group>
 </div>
 <div [hidden]="authenticated">
   <div class="container">

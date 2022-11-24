@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { MedicalInstitution } from './medical-institution';
 import { MedicalInstitutionService } from './medical-institution-service.service';
@@ -20,9 +22,10 @@ export class AppComponent {
   medicalInstitutions: MedicalInstitution[];
   declarationRequests: DeclarationRequest[];
   authenticated = false;
-  authenticatedAsConsultant = false;
   authenticatedAsUser = false;
+  authenticatedAsConsultant = false;
   error = false;
+  userId : string;
   roles : any;
   credentials = {username: '', password: ''};
   constructor(private app: AppService,
@@ -46,8 +49,9 @@ export class AppComponent {
                 this.tokenStorage.saveToken(data.token);
                 this.tokenStorage.saveUser(data);
                 this.roles = this.tokenStorage.getUser().roles;
-                this.authenticatedAsConsultant = this.roles.includes('ROLE_CONSULTANT');
+                this.userId = this.tokenStorage.getUser().id;
                 this.authenticatedAsUser = this.roles.includes('ROLE_USER');
+                this.authenticatedAsConsultant = this.roles.includes('ROLE_CONSULTANT');
                 this.authenticated = true;
                 this.error = false;
                 this.refresh(true);
@@ -67,9 +71,15 @@ export class AppComponent {
 
   refresh(newItem: boolean) {
       if(newItem == true) {
-        this.declarationRequestService.findDeclarationsByUser(this.tokenStorage.getUser().id).subscribe((data: any) => {
-           this.declarationRequests = data;
-        });
+        if(this.authenticatedAsUser == true) {
+          this.declarationRequestService.findDeclarationsByUser(this.userId).subscribe((data: any) => {
+             this.declarationRequests = data;
+          });
+        } else if (this.authenticatedAsConsultant == true) {
+            this.declarationRequestService.findAllDeclarations().subscribe((data: any) => {
+               this.declarationRequests = data;
+            });
+        }
       }
   }
 }
