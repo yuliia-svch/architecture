@@ -18,7 +18,6 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Institutions';
   medicalInstitutions: MedicalInstitution[];
   declarationRequests: DeclarationRequest[];
   authenticated = false;
@@ -27,6 +26,8 @@ export class AppComponent {
   error = false;
   userId : string;
   roles : any;
+  isLoaded = false;
+  city : string;
   credentials = {username: '', password: ''};
   constructor(private app: AppService,
               private medicalInstitutionService: MedicalInstitutionService,
@@ -64,8 +65,10 @@ export class AppComponent {
     }
 
   onSelected(value:string): void {
+    this.city = value;
   	this.medicalInstitutionService.findByCity(value).subscribe(data => {
         this.medicalInstitutions = data;
+        this.isLoaded = true;
     });
   }
 
@@ -81,5 +84,6 @@ export class AppComponent {
             });
         }
       }
+
   }
 }

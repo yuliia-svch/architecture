@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { MedicalInstitutionDetailsComponent } from '../medical-institution-details/medical-institution-details.component'
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-medical-institution-list',
@@ -16,7 +17,13 @@ export class MedicalInstitutionListComponent {
   @Input() medicalInstitutions: MedicalInstitution[];
   doctors: Doctor[];
   @Output() newItemEvent = new EventEmitter<boolean>();
-  constructor(private medicalInstitutionService: MedicalInstitutionService, private dialog: MatDialog) {
+  form: FormGroup;
+  @Input() isLoaded: boolean;
+  @Input() searchedResult : MedicalInstitution[];
+  @Input() city : string;
+  constructor(private medicalInstitutionService: MedicalInstitutionService,
+              private dialog: MatDialog) {
+
   }
 
   seeFull(id: string) {
@@ -55,5 +62,21 @@ export class MedicalInstitutionListComponent {
         this.doctors = [];
       });
 
+    }
+
+    search(event : any) : void {
+      this.searchedResult = [];
+      let newResult : MedicalInstitution[] = [];
+      let term = event.target.value;
+        this.medicalInstitutions.forEach(function (value : any) {
+            if(value.name.toLowerCase().includes(term.toLowerCase())) {
+                 newResult.push(value);
+            }
+        });
+        this.searchedResult = newResult;
+    }
+
+    helsi() : void {
+      window.open("https://helsi.me/doctors/" + this.city.toLowerCase(), "_blank");
     }
 }

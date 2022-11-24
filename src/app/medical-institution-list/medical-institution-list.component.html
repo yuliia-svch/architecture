@@ -1,4 +1,16 @@
-<div *ngFor="let medicalInstitution of medicalInstitutions">
+<div [hidden]="!isLoaded">
+  <div class="row">
+    <div class="col-8">
+      <p><input type="text" class="form-control" placeholder="Search by name" (input)="search($event)"></p>
+    </div>
+    <div class="col-4">
+      <button (click)="helsi()" class="btn btn-outline-dark">Make a doctor appointment in {{city}}</button>
+    </div>
+  </div>
+
+
+</div>
+<div *ngFor="let medicalInstitution of searchedResult">
   <div class="card my-5">
     <div class="card-body">
       <mat-card class="inner-card">
